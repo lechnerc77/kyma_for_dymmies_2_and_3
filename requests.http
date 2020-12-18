@@ -1,0 +1,36 @@
+@baseUrlKyma = https://safeapp.<YOUR_KYMA_DOMAIN>
+@oAuthUrlKyma = https://oauth2.<YOUR_KYMA_DOMAIN>/oauth2/token
+
+### GET on localhost - node, path = /free
+GET http://localhost:1111/free
+
+### GET on localhost - node, path = /prot
+GET http://localhost:1111/prot
+
+---
+### GET on Docker - node, path = /free
+GET http://localhost:2222/free
+
+### GET on Docker - node, path = /prot
+GET http://localhost:2222/prot
+
+---
+### GET on Kyma - node, path = /free
+GET {{baseUrlKyma}}/free
+
+### GET on Kyma - node, path = /prot => error due to missing authentication
+GET {{baseUrlKyma}}/prot
+
+---
+### 
+# @name auth
+POST {{oAuthUrlKyma}}
+Content-type: application/x-www-form-urlencoded
+Authorization: Basic <YOUR_CLIENT_ID>:<YOUR_CLIENT_SECRET>
+
+grant_type=client_credentials
+&scope=nodesafeaccessscope
+
+### Call the secured endpoint
+GET {{baseUrlKyma}}/prot
+Authorization: Bearer {{auth.response.body.access_token}}

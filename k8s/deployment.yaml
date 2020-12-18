@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-app-nodesafe
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        apptemplate: template-nodesafeapp
+    spec:
+      containers:
+        - image: <YOUR_DOCKER_ID>/safeapp:0.0.1 
+          imagePullPolicy: Always
+          name: container-safeapp
+          ports:
+            - name: http
+              containerPort: 1111
+  selector:
+    matchLabels:
+      apptemplate: template-nodesafeapp

@@ -1,0 +1,19 @@
+{
+  "name": "kyma_for_dymmies",
+  "version": "0.0.1",
+  "description": "Source code for Kyma for Dymmies series",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Kyma",
+    "node",
+    "OAuth2"
+  ],
+  "author": "Christian Lechner",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

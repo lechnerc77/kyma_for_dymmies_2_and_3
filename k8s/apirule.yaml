@@ -1,0 +1,27 @@
+apiVersion: gateway.kyma-project.io/v1alpha1
+kind: APIRule
+metadata:
+  name: apirule-nodesafe
+spec:
+  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  rules:
+    - path: /free
+      accessStrategies:
+        - config: {}
+          handler: noop
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+    - path: /prot
+      accessStrategies:
+        - handler: oauth2_introspection
+          config:
+            required_scope: ["nodesafeaccessscope"]
+      methods:
+        - GET
+  service:
+    host: safeapp
+    name: service-nodesafeapp
+    port: 3333
